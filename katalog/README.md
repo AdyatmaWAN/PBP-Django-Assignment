@@ -28,15 +28,23 @@ Cara implementasi
 -----------------
 #### 1. Membuat sebuah fungsi pada views.py yang dapat melakukan pengambilan data dari model dan dikembalikan ke dalam sebuah HTML.
 ![alt text](./asset/views_py.png "fungsi di views.py")
+
 Membuat fungsi show_katalog pada views.py untuk mengatur apa yang akan ditampilkan oleh template file .html berdasar data dari database
+
 #### 2. Membuat sebuah routing untuk memetakan fungsi yang telah kamu buat pada views.py.
 ![alt text](./asset/urls_catalog_py.png "routing di urls.py")
+
 Membuat path pada urls.py untuk mengarahkan ke urls.py pada katalog
+
 ![alt text](./asset/urls_py.png "routing di urls.py")
+
 Membuat path pada urls.py untuk mengarahkan ke fungsi show_katalog pada views.py
+
 #### 3. Memetakan data yang didapatkan ke dalam HTML dengan sintaks dari Django untuk pemetaan data template.
 ![alt text](./asset/html.png "template di .html")
+
 Menggunakan for loop Django untuk menampilkan data ke dalam template .html
+
 #### 4. Melakukan deployment ke Heroku terhadap aplikasi yang sudah kamu buat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.
 1. Membuat app baru di Heroku
 2. Merubah isi dpl.yml dengan mengganti nama app Heroku dan api key Heroku
