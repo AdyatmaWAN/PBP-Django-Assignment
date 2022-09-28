@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Create Task Form</title>
+{% endblock meta %}
+
+{% block content %}
+    <body>
+
+    <div class="create-task-container">
+        <div class="create-task">
+            <h1>Create New Task</h1>
+
+            <div class="task-form">
+                <form action="/todolist/create-task/" method="POST">
+                    {% csrf_token %}
+                    <table cellspacing="0" cellpadding="0">
+                        {{ form.as_table }}
+                    </table>
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <div class="back-button">
+        <a href="{% url 'todolist:show_todolist' %}">< Back</a>
+    </div>
+
+    </body>
+
+{% endblock content %}
+</html>
