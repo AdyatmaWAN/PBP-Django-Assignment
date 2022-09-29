@@ -5,7 +5,7 @@ from django.db import models
 
 class TodoListItems(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
+    title = models.TextField()
     description = models.TextField()
     date = models.DateTimeField()
     is_finished = models.BooleanField(default=False)
