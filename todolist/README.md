@@ -236,3 +236,48 @@ Jelaskan tipe-tipe CSS selector yang kamu ketahui.
 
 Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 -
+1. Menambahkan Bootstrap pada project Django dengan menambah link pada `base.html`.
+```
+<head>
+  ...
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  ...
+</head>
+```
+2. Melakukan styling dan membuat page responsive.
+```
+    1. Kostumisasi template. Misal membuat login menjadi card:
+```
+```
+<div class="d-flex justify-content-center mt-5" >
+        <div class="card " style="width: rem;">
+            <div class="card-body">
+                <h1>Login</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <table>
+                        <div>
+                            ...
+                        </div>
+                    </table>
+                </form>
+                Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+            </div>
+        </div>
+```
+        2. Membuat page responsive
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+        3. Menambah efek hover pada card
+```
+<style>
+    .card:hover{
+    transform: scale(1.01);
+    box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.06);
+    }
+</style>
+```
