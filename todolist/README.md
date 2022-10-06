@@ -170,3 +170,69 @@ urlpatterns = [
     path('change_status/<int:id>', change_status, name='change_status')
 ]
 ```
+PBP Tugas 5
+=
+### Adyatma Wijaksara Aryaputra Nugraha Yudha - 2106750805
+### [Web Page](https://pbp-tugas2-adyatma.herokuapp.com/todolist)
+Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+-
+1. Inline CSS
+Inline CSS adalah style yang ditulis langsung pada tag HTML. Inline CSS memiliki kelebihan yaitu mudah untuk diimplementasikan langsung pada elemen, namun memiliki kekurangan yaitu harus menambahkan style untuk setiap elemen.
+contoh :
+```
+<div style="color: red; font-size: 20px;">Ini adalah contoh inline CSS</div>
+```
+2. Internal CSS
+Internal CSS adalah style yang ditulis pada tag `<style>` di dalam file html. Internal CSS memiliki kelebihan yaitu dapat melakukan styleing untuk satu file sekaligus, namun meningkatkan loading time halaman css tersebut.
+contoh :
+```
+<style>
+    .test {
+        color: red;
+        font-size: 20px;
+    }
+</style>
+
+<div class="test">Ini adalah contoh internal CSS</div>
+```
+3. External CSS
+External CSS adalah style yang ditulis pada file css yang berbeda dengan file html. External CSS memiliki kelebihan yaitu dapat melakukan styling untuk banyak file sekaligus, namun memiliki kekurangan yaitu harus membuat file css terpisah.
+contoh :
+
+pada file `test.html`
+```
+<head>
+    <link rel="stylesheet" href="test.css">
+</head>
+<div class="test"> Ini adalah contoh external CSS </div>
+```
+pada file `test.css`
+```
+.test {
+    color: red;
+    font-size: 20px;
+}
+```
+Jelaskan tag HTML5 yang kamu ketahui.
+-
+1. `<div>` adalah tag yang digunakan untuk membuat sebuah divisi atau section pada halaman web.
+2. `<span>` adalah tag yang digunakan untuk membuat sebuah span atau bagian pada halaman web.
+3. `<title>` adalah tag yang digunakan untuk menentukan judul halaman web.
+4. `<meta>` adalah tag yang digunakan untuk menentukan metadata halaman web.
+5. `<nav>` adalah tag yang digunakan untuk membuat navigasi pada halaman web.
+6. `<label>` adalah tag yang digunakan untuk menentukan label pada halaman web.
+7. `<input>` adalah tag yang digunakan untuk membuat input pada halaman web.
+8. `<form>` adalah tag yang digunakan untuk membuat form pada halaman web.
+9. `<button>` adalah tag yang digunakan untuk membuat button pada halaman web.
+10. `<table>` adalah tag yang digunakan untuk membuat tabel pada halaman web.
+
+Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+-
+1. `.class` adalah selector yang digunakan untuk memilih elemen yang memiliki class tertentu. misal `.test` akan memilih elemen yang memiliki class `test`.
+2. `#id` adalah selector yang digunakan untuk memilih elemen yang memiliki id tertentu. misal `#test` akan memilih elemen yang memiliki id `test`.
+3. `element` adalah selector yang digunakan untuk memilih elemen yang memiliki nama tag tertentu. misal `div` akan memilih elemen yang memiliki nama tag `div`.
+4. `element, element` adalah selector yang digunakan untuk memilih elemen yang memiliki nama tag tertentu. misal `div, span` akan memilih elemen yang memiliki nama tag `div` dan `span`.
+5. `element.class` adalah selector yang digunakan untuk memilih elemen yang memiliki nama tag tertentu dan memiliki class tertentu. misal `div.test` akan memilih elemen yang memiliki nama tag `div` dan memiliki class `test`.
+
+Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+-
