@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>TODOLIST | {{ nama }}</title>
+{% endblock meta %}
+
+{% block content %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .card:hover{
+            transform: scale(1.01);
+            box-shadow: 0 5px 10px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.06);
+        }
+    </style>
+    <nav class="navbar" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">{{ nama }}</span>
+            <a class="btn btn-sm btn-danger" href="{% url 'todolist:logout' %}">Logout</a>
+        </div>
+    </nav>
+    <div class="w-80 d-flex">
+        <table class="table table-striped ">
+            <thead>
+                <tr class="">
+                    <th class="text-center" scope="col">TodoList</th>
+                </tr>
+            </thead>
+            <tbody id="content"></tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <a class="btn btn-outline-secondary " data-bs-toggle="modal" data-bs-target="#modal-ajax">Create New Task</a>
+    </div>
+
+
+    <!-- modal -->
+    <div class="modal fade" id="modal-ajax" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Task</h1>
+                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="title" class="col-form-label">Title</label>
+                            <input type="text" name="title" class="form-control" id="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description</label>
+                            <textarea class="form-control" id="description"  name="description" required></textarea>
+                        </div>
+
+                        <input type="submit" id="submit-modal" class="btn btn-primary" data-bs-dismiss="modal"></input>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function getTask() {
+            return fetch("{% url 'todolist:show_todolist_json' %}").then((response) => response.json());
+        }
+
+        async function refreshTask() {
+            document.getElementById("content").innerHTML = "";
+            const task = await getTask();
+            const content = document.getElementById("content");
+            content.innerHTML = "";
+            task.forEach((item) => {
+                let message = ''
+                if (item.is_finished){
+                    message = 'Completed'
+                } else {
+                    message = 'Incomplete'
+                }
+                content.innerHTML += `
+                    <tr>
+                        <td class="d-flex flex-column align-items-center" >
+                            <div class="card " id="${item.pk}-card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${item.fields.title}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${item.fields.date}</h6>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <h6 class="card-subtitle mb-2 text-muted">${message}</h6>
+
+                                    <a class="btn btn-primary" id='${item.pk}-update' class="card-link">Update</a>
+                                    <a  class="btn btn-danger" id='${item.pk}-delete' class="card-link" type="submit">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addTask() {
+            fetch("{% url 'todolist:add_task' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector("#form"))
+            }).then(refreshTask)
+            return false
+        }
+
+        document.getElementById("submit-modal").onclick = addTask
+        refreshTask()
+
+        window.onload = async function () {
+            const task = await refreshTask();
+            document.getElementById('${item.pk}-delete').onClick = async function () {
+                $.ajax({
+                    url: `todolist:delete_task/${item.pk}`,
+                    type: "DELETE",
+                    success: function (response) {
+                        refreshTask()
+                    }
+                });
+
+            }
+
+        }
+
+    </script>
+
+{% endblock content %}

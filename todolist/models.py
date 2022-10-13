@@ -7,5 +7,5 @@ class TodoListItems(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField()
     description = models.TextField()
-    date = models.DateTimeField()
+    date = models.DateField()
     is_finished = models.BooleanField(default=False)
